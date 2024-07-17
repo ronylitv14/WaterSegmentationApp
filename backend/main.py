@@ -1,20 +1,21 @@
-import os
 import sys
 
 from fastapi import status, FastAPI, UploadFile, Response, HTTPException
 from keras.models import load_model
 from utils.image_preprocessing import image_pipeline, save_image_to_bytes
+
 from middlewares.cache import CachePredictionMiddleware, REQUEST_PATH
+from middlewares.rate_limiting import RateLimitingMiddleware
 
 from utils.redis import save_img_prediction
+
+from settings import MODEL_PATH
 
 app = FastAPI()
 
 app.add_middleware(CachePredictionMiddleware)
+app.add_middleware(RateLimitingMiddleware)
 
-MODEL_NAME = "UNet-water-segmentation.keras"
-MODEL_FOLDER = "models"
-MODEL_PATH = os.path.join(os.getcwd(), MODEL_FOLDER, MODEL_NAME)
 
 try:
     MODEL = load_model(MODEL_PATH)
