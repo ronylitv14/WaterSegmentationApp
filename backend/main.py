@@ -6,6 +6,7 @@ from utils.image_preprocessing import image_pipeline, save_image_to_bytes
 
 from middlewares.cache import CachePredictionMiddleware, REQUEST_PATH
 from middlewares.rate_limiting import RateLimitingMiddleware
+from fastapi.middleware.cors import CORSMiddleware
 
 from utils.redis import save_img_prediction
 
@@ -13,9 +14,19 @@ from settings import MODEL_PATH
 
 app = FastAPI()
 
+origins = [
+    "http://localhost:9000",
+]
+
 app.add_middleware(CachePredictionMiddleware)
 app.add_middleware(RateLimitingMiddleware)
-
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 try:
     MODEL = load_model(MODEL_PATH)
