@@ -4,7 +4,7 @@ const Dotenv = require('dotenv-webpack');
 
 module.exports = {
     entry: {
-        main: path.resolve(__dirname),
+        main: path.resolve(__dirname, "./js/dragAndDrop.js"),
     },
     output: {
         path: path.resolve(__dirname, 'dist'),
