@@ -129,6 +129,8 @@ dist
 .yarn/install-state.gz
 .pnp.*
 
+frontend/package-lock.json
+
 ### Python template
 # Byte-compiled / optimized / DLL files
 __pycache__/

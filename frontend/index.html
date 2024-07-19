@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Water Segmentation Tool</title>
+</head>
+<body>
+    <main>
+        <div class="container">
+            <div class="upload">
+                <h2 class="title">Upload Your Image</h2>
+                <p class="desc">Our AI will process your image and highlight water areas</p>
+                <form id="upload-form" enctype="multipart/form-data">
+                    <div class="upload-area" id="drop-area">
+                        <label for="file-input">
+                            Click to select an image<br>or<br>Drag and drop your image here
+                        </label>
+                        <input type="file" id="file-input" name="image" accept="image/*" required>
+                    </div>
+                </form>
+            </div>
+            <div class="results-section">
+                <h2>Results</h2>
+                <div id="loading" aria-live="polite">Processing image... Please wait.</div>
+                <div class="image-container">
+                    <figure class="image-box">
+                        <h3 class="title">Original Image</h3>
+                        <img class="image" id="original-image" src="" alt="Original image">
+                        <figcaption>Your uploaded image</figcaption>
+                    </figure>
+                    <figure class="image-box">
+                        <h3 class="title">Segmented Image</h3>
+                        <img class="image" id="segmented-image" src="" alt="Segmented image">
+                        <figcaption>Image with water areas highlighted</figcaption>
+                    </figure>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

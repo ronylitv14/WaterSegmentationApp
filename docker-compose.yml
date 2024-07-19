@@ -1,0 +1,43 @@
+version: "3.8"
+
+services:
+  backend:
+    build:
+      context: backend
+    env_file:
+      - ./backend/.env
+    environment:
+      REDIS_HOST: redis-db
+    ports:
+      - "8000:8000"
+    depends_on:
+      - redis-db
+    volumes:
+      - ./backend/models:/home/app/models
+
+  frontend:
+    build:
+      context: frontend
+    environment:
+      API_URL: backend
+    ports:
+      - "9000:9000"
+    depends_on:
+      - backend
+
+  redis-db:
+    image: redis:7-alpine
+    env_file:
+      - ./backend/.env
+    expose:
+      - "6379"
+    command:
+      - /bin/sh
+      - -c
+      - redis-server --requirepass "$${REDIS_PASSWORD:?REDIS_PASSWORD variable is not set}"
+    volumes:
+      - redis_data:/data/redis
+
+volumes:
+  redis_data:
+
