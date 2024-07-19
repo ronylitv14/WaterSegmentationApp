@@ -7,7 +7,9 @@ from .hashing import hash_image
 
 
 def construct_url():
-    return f"redis://:{REDIS_PASSWORD}@{REDIS_HOST}:{REDIS_PORT}/{REDIS_DB}"
+    if REDIS_PASSWORD:
+        return f"redis://:{REDIS_PASSWORD}@{REDIS_HOST}:{REDIS_PORT}/{REDIS_DB}"
+    return f"redis://{REDIS_HOST}:{REDIS_PORT}/{REDIS_DB}"
 
 
 def construct_image_key(image_hash: str):

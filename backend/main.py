@@ -34,7 +34,7 @@ except OSError:
     sys.exit("Wrong path to model!")
 
 
-@app.get("/root")
+@app.get("/")
 async def root():
     return {"message": "Hello World"}
 
