@@ -18,8 +18,8 @@ services:
   frontend:
     build:
       context: frontend
-    env_file:
-      - frontend/.env
+    environment:
+      API_URL: backend
     ports:
       - "9000:9000"
     depends_on:
